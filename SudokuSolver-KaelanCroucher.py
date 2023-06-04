@@ -22,22 +22,27 @@ def printBoard(sudokuBoard):
       # Else just print the tile value and a spacer.
       else:
         print(str(sudokuBoard[i][j]), end = " ")
-  print("X-----------------------X")
+  
+  # Print ending line of the puzzle
+  print("X-----------------------X\n")
 
 # Method to Validate each tile placed on the board.
 def validateTile(currentBoard, row, column, tileValue ):
 
+  # Check each row of the board for the tile value, if found return false.
   if tileValue in currentBoard[row]:
     return False
   
+  # Check each column of the board for the tile value, if found return false.
   if tileValue in [currentBoard[i][column] for i in range(9)]:
     return False
   
+  # Set the start column and row to check the 3x3 section for tile value.
   startRow, startColumn = row - row % 3, column - column % 3
 
+  # Check each 3x3 section for the tile value, if found return false.
   if tileValue in [currentBoard[i][j] for i in range(startRow, startRow + 3) 
     for j in range(startColumn, startColumn + 3)]:
-    
     return False
   
   return True
@@ -73,6 +78,16 @@ def newSudokuBoard():
     #If valid generation assign value to tile on board.
     initialBoard[row][column] = tileValue
 
+  #Print the newly generated initial puzzle board.
+  print("Inital Board (34/81):")
+  printBoard(initialBoard)
+  
+  # Return the newly filled intital puzzle boarc.
   return initialBoard
 
-printBoard(newSudokuBoard())
+
+print("Welcome to Kaelan's Sudoku Solver.")
+print("The program will generate a random Sudoku Puzzle with 34/81 tiles filled.")
+print("Then the program will use the backtracking algorithm to solve the puzzle.\n")
+
+newSudokuBoard()
