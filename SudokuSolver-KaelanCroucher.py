@@ -89,6 +89,7 @@ def newSudokuBoard():
   # Return the newly filled intital puzzle board.
   return initialBoard
 
+# Method to solve the Sudoku puzzle with backtracking algorithm.
 def solveSudokuPuzzle(sudokuPuzzle, row = 0, column = 0):
   # If current column counter is at 9 increment to the next row and start again at 0.
   if column == 9:
@@ -124,7 +125,7 @@ print("Welcome to Kaelan's Sudoku Solver.")
 print("The program will generate a random Sudoku Puzzle with 24/81 tiles filled.")
 print("Then the program will use the backtracking algorithm to solve the puzzle.")
 print("Note: According to my testing my program will only generate solvable puzzles 43% of the time.")
-print("Rerun the program if you are getting a unsolvable puzzle. Sometimes it takes multiple run.\n")
+print("Rerun the program if you are getting a unsolvable puzzle. Sometimes it takes multiple runs.\n")
 
 # If Function returns false, notify user that board generated was unsolvalbe.
 if solveSudokuPuzzle(newSudokuBoard()) == False:
