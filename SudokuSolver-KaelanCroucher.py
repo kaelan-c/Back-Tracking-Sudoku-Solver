@@ -79,15 +79,36 @@ def newSudokuBoard():
     initialBoard[row][column] = tileValue
 
   #Print the newly generated initial puzzle board.
-  print("Inital Board (34/81):")
+  print("Inital Board:")
   printBoard(initialBoard)
   
-  # Return the newly filled intital puzzle boarc.
+  # Return the newly filled intital puzzle board.
   return initialBoard
 
+def solveSudokuPuzzle(sudokuPuzzle, row = 0, column = 0):
+  
+  if column == 9:
+    if row == 8:
+      print("Solved Board")
+      printBoard(sudokuPuzzle)
+      return True
+    row +=1
+    column = 0
+  
+  if sudokuPuzzle[row][column] != 0:
+    return solveSudokuPuzzle(sudokuPuzzle, row, column + 1)
+  
+  for tileValue in range(1, 10):
+    if validateTile(sudokuPuzzle, row, column, tileValue):
+      sudokuPuzzle[row][column] = tileValue
+      if solveSudokuPuzzle(sudokuPuzzle, row, column + 1):
+        return True
+
+  sudokuPuzzle[row][column] = 0
+  return False
 
 print("Welcome to Kaelan's Sudoku Solver.")
 print("The program will generate a random Sudoku Puzzle with 34/81 tiles filled.")
 print("Then the program will use the backtracking algorithm to solve the puzzle.\n")
 
-newSudokuBoard()
+solveSudokuPuzzle(newSudokuBoard())
