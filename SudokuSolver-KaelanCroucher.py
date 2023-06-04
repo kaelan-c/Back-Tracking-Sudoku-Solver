@@ -83,37 +83,49 @@ def newSudokuBoard():
       filledTiles += 1
 
   #Print the newly generated initial puzzle board.
-  print("Inital Board:")
+  print("Inital Board (24/81):")
   printBoard(initialBoard)
   
   # Return the newly filled intital puzzle board.
   return initialBoard
 
 def solveSudokuPuzzle(sudokuPuzzle, row = 0, column = 0):
-  
+  # If current column counter is at 9 increment to the next row and start again at 0.
   if column == 9:
+    # If the column counter is at 9 and the row counter is at 8 the board has been solved.
+    # Print board and return true.
     if row == 8:
-      print("Solved Board:")
+      print("Solved Board (81/81):")
       printBoard(sudokuPuzzle)
       return True
+    # Increment the row and rest column counter.
     row +=1
     column = 0
   
+  # If the current tile does not = 0 recursivley call on next tile.
   if sudokuPuzzle[row][column] != 0:
     return solveSudokuPuzzle(sudokuPuzzle, row, column + 1)
   
+  # If the current tile is 0 try every tile value at current position until one is valid.
   for tileValue in range(1, 10):
     if validateTile(sudokuPuzzle, row, column, tileValue):
       sudokuPuzzle[row][column] = tileValue
+      # Recursively call the to next collumn posistion. Until function returns true.
       if solveSudokuPuzzle(sudokuPuzzle, row, column + 1):
         return True
 
+  # Backtrack if current tile cannot be solved with current board state.
+  # Note: If the entire function returns false it means the board was unsolvable.
   sudokuPuzzle[row][column] = 0
   return False
 
+# Print Welcome message + info.
 print("Welcome to Kaelan's Sudoku Solver.")
 print("The program will generate a random Sudoku Puzzle with 24/81 tiles filled.")
-print("Then the program will use the backtracking algorithm to solve the puzzle.\n")
+print("Then the program will use the backtracking algorithm to solve the puzzle.")
+print("Note: According to my testing my program will only generate solvable puzzles 43% of the time.")
+print("Rerun the program if you are getting a unsolvable puzzle. Sometimes it takes multiple run.\n")
 
+# If Function returns false, notify user that board generated was unsolvalbe.
 if solveSudokuPuzzle(newSudokuBoard()) == False:
   print("Sudoku Board is Unsolvable.\n")
