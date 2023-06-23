@@ -3,7 +3,7 @@ Small Sudoku solving program written in Python using the Back Tracking Algorithm
 
 Sample Output:
 
-'''
+```text
 Welcome to Kaelan's Sudoku Solver.
 The program will generate a random Sudoku Puzzle with 24/81 tiles filled.
 Then the program will use the backtracking algorithm to solve the puzzle.
@@ -40,4 +40,4 @@ X-----------------------X
 | 2 3 1 | 7 6 8 | 4 9 5 |
 | 6 5 9 | 2 4 1 | 8 7 3 |
 X-----------------------X
-'''
+```
